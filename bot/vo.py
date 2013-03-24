@@ -5,7 +5,7 @@ Created on 2013-3-20
 '''
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy.ext.declarative.api import declarative_base
-from sqlalchemy.orm import  relationship
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
@@ -41,6 +41,10 @@ class DataSource(Base):
     providers = relationship(u"Provider", backref=u"DC_DataSource")
     
 class Provider(Base):
+    
+    def __init__(self, *args, **kws):
+        self.dfcfg = None
+    
     __tablename__ = u"DC_Provider"
     
     recordid = Column(u'RecordID', String(32), primary_key=True)
@@ -54,14 +58,15 @@ class Provider(Base):
     mtime = Column(u'MTime', DateTime)
     ctime = Column(u'CTime', DateTime)
     
-
     providerfetchcfg = relationship(u'ProviderFetchCfg', backref=u"DC_Provider")
+    
     
 class ProviderFetchCfg(Base):
     __tablename__ = u"DC_ProviderFetchCfg"
     
     recordid = Column(u'RecordID', String(32), primary_key=True)
     spidername = Column(u"SpiderName", String(128))
+    settingspath = Column(u"SettingsPath", String(256))
     minute = Column(u"Minute", String)
     hour = Column(u"Hour", String(128))
     dayofmonth = Column(u"DayOfMonth", String(32))

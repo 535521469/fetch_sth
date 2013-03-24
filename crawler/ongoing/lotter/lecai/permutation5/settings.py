@@ -8,6 +8,6 @@ BOT_NAME = 'Permutation5Spider'
 SPIDER_MODULES = ['crawler.ongoing.lotter.lecai.permutation5.permutationspider']
 #NEWSPIDER_MODULE = 'scrapy.statsgov.spiders'
 
-LOG_LEVEL = 'DEBUG'
+LOG_LEVEL = 'INFO'
 
-DOWNLOAD_DELAY = 5
+DOWNLOAD_DELAY = 8

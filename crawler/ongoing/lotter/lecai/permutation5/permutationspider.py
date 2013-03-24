@@ -3,6 +3,7 @@ Created on 2013-3-20
 @author: corleone
 '''
 from crawler.ongoing.lotter.lecai.spider import LeCaiHomeSpider
+from scrapy import log
 from scrapy.http.request import Request
 from scrapy.selector import HtmlXPathSelector
 
@@ -20,7 +21,9 @@ class Permutation5Spider(LeCaiHomeSpider):
         hxs = HtmlXPathSelector(response)
 #        select('//table[@id="draw_list"]//tr')
         next_a_tag = hxs.select('//div[@class="page"]//a[@class="next"]')
-        print response.url
-        yield Request(next_a_tag.select('@href').extract()[0], self.parse)
+        
+        self.log('%s , %s' % (self.name , response.url), log.INFO)
+        
+#        yield Request(next_a_tag.select('@href').extract()[0], self.parse)
     
 
